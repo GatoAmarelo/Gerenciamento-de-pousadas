@@ -1,7 +1,7 @@
 
 typedef struct pousadap Pousadap;
 typedef struct quarto Quarto;
-typedef struct lista Lista;
+typedef struct li Lista;
 void PreencheQuarto(char *nomeArquivo);
-Pousadap * cria ();
-int InsereHospede(Pousadap * lista, struct quarto v);
+Lista * cria ();
+int InsereHospede(Lista * lista);
