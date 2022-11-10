@@ -14,9 +14,9 @@ struct quarto{
 	    
 };
 
-struct lista{
+struct li{
 	struct quarton* info;
-	struct lista * prox;
+	struct li* prox;
 	
 };
 
@@ -41,8 +41,8 @@ void PreencheQuarto(char *nomeArquivo){
     scanf("%f", &q.info.preco);
     printf("Digite o numero do quarto : \n");
     scanf(" %d", &q.info.numero);
-   printf("Qual tipo de quarto deseja ? \n");
-   scanf("%s", q.info.tipo);
+    printf("Qual tipo de quarto deseja ? \n");
+    scanf("%s", q.info.tipo);
     printf("Quantos dias deseja ficar ? \n");
     scanf("%d", &q.info.duracao);
 
@@ -96,14 +96,14 @@ void PreencheQuarto(char *nomeArquivo){
 	}
 	
 	
-// Pousadap * cria (){ // criando uma lista
-//	Pousadap * lista = (Pousadap*) malloc(sizeof(Pousadap));
-//	   if (lista!=NULL)
-//		   lista = NULL;
-//		   return lista;	   }
+ Lista * cria (){ // criando uma lista
+	Lista * lista = (Lista*) malloc(sizeof(Lista));
+	   if (lista!=NULL)
+		   lista = NULL;
+		   return lista;	   }
 
-//int InsereHospede(Pousadap * lista){
-//	Pousadap * novo = (Pousadap*)malloc(sizeof(Pousadap));
-//	novo -> info = // preenchequarto ;
-//	novo -> prox = lista;
-// 	return novo;}
+int InsereHospede(Lista * lista){
+	Lista * novo = (Lista*)malloc(sizeof(Lista));
+	novo -> info = PreencheQuarto;
+	novo -> prox = lista;
+ 	return novo;}

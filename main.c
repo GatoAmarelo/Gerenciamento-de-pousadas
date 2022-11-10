@@ -1,9 +1,8 @@
-#include "pousada.h"
+
 #include<stdio.h>
 
 int main (){ 
-	 Pousadap * lista;
-	 lista = cria();
+	 
      printf("Menu da Pousada \n");
      printf("1 - Adiciona hospede \n");
      printf("2 - Remove hospede \n");
@@ -18,6 +17,7 @@ int main (){
          
 		break;
     case 2 : 
+            
            printf("Remove hospede \n");
            break;
     case 3 : return (1);
