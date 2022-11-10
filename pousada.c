@@ -18,7 +18,7 @@ struct lista{
 	struct quarton* info;
 	struct lista * prox;
 	
-}
+};
 
 struct pousadap{
 	   char nome[50];
@@ -96,12 +96,11 @@ void PreencheQuarto(char *nomeArquivo){
 	}
 	
 	
- Pousadap * cria (){ // criando uma lista
-	Pousadap * lista = (Pousadap*) malloc(sizeof(Pousadap));
-	   if (lista!=NULL)
-		   lista = NULL;
-		   return lista;	   
-}
+// Pousadap * cria (){ // criando uma lista
+//	Pousadap * lista = (Pousadap*) malloc(sizeof(Pousadap));
+//	   if (lista!=NULL)
+//		   lista = NULL;
+//		   return lista;	   }
 
 //int InsereHospede(Pousadap * lista){
 //	Pousadap * novo = (Pousadap*)malloc(sizeof(Pousadap));
