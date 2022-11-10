@@ -95,15 +95,20 @@ void PreencheQuarto(char *nomeArquivo){
 	   fclose(arquivo);
 	}
 	
-	
+ 	
  Lista * cria (){ // criando uma lista
-	Lista * lista = (Lista*) malloc(sizeof(Lista));
-	   if (lista!=NULL)
-		   lista = NULL;
-		   return lista;	   }
+	     return NULL;
+	   }
 
 int InsereHospede(Lista * lista){
 	Lista * novo = (Lista*)malloc(sizeof(Lista));
 	novo -> info = PreencheQuarto;
 	novo -> prox = lista;
- 	return novo;}
+ 	return novo;
+	}
+
+
+
+
+
+	
