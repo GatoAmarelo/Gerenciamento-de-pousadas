@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <windows.h>
-#include "pousada.h"
+#include "pousada.c"
 
 #define TITULO_OPCAO1 "Adicionar Hospede" // texto exibido no menu
 #define TITULO_OPCAO2 "Remover Hospede"
@@ -86,34 +86,37 @@ void ApresentaMenu(int nItens, int menorOpcao, ...) { // funcao responsavel por 
 int main(void) { 
     unsigned char op; // opcao que o usuario digita
     unsigned int saida = 0; // variável aux para sair do programa
-
+    Lista * listadequarto = cria();
     do { // repetir menu 
         ApresentaMenu(N_OPCOES, OPCAO1,
                       TITULO_OPCAO1, TITULO_OPCAO2,
                       TITULO_OPCAO3, TITULO_OPCAO4, TITULO_OPCAO5, 
 					  TITULO_OPCAO6, TITULO_OPCAO7, TITULO_OPCAO8);
         op = LeOpcao(OPCAO1, OPCAO1 + N_OPCOES - 1); 
+        
         switch(op) {
             case OPCAO1:
                 
                 Beep(1000,500); /* Emite um beep */
                  // chamada da funcao que adiciona hospede
+              
+               Quarto * novoquarto = PreencheQuarto();
+               listadequarto = InsereQuarto(listadequarto, novoquarto);
+               break;
                
-                break;
-
             case OPCAO2:
                 Beep(1000,500);
                 // chamada da funcao que remove hospede
                
                 break;
-
+ 
             case OPCAO3:
                 Beep(1000,500);
-              
+              ListarQuarto(listadequarto);
                 break;
             case OPCAO4:
                 Beep(1000,500);
-               
+              //  BuscaHospede(lista);
                 
                 break;
             case OPCAO5:
