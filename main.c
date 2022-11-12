@@ -116,8 +116,28 @@ int main(void) {
                 break;
             case OPCAO4:
                 Beep(1000,500);
-              //  BuscaHospede(lista);
-                
+             //BuscaHospede(lista);
+             //
+                Lista * p; // chama a lista para depois poder acessar o nome do hospede (atraves de info)
+                printf("Digite o nome do hospede que deseja buscar : \n"); 
+               scanf("%[^\n]",p->info->hospede); // lendo o nome do hospede que devera ser encontrado
+                Quarto * nomedohospede = p->info->hospede; 
+               listadequarto = BuscaHospede(listadequarto,nomedohospede); // chamado a funcao busca hospede
+               
+                 //  printf("Digite o nome do hospede que deseja buscar : \n");   
+
+                 //  scanf("%s", hospede);
+                 //  Lista * p = BuscaHospede(p, hospede);
+                 //  if(p != NULL)
+			
+			//	printf("===Dados do hospede=========\n");
+			//	printf("%s \n", p->info->hospede);
+	         //   printf("%f \n", p->info->preco);
+	         //   printf("%d \n", p->info->numero);
+	         //   printf("%s \n", p->info->tipo);
+	         //   printf("%d \n", p->info->duracao);
+			//	printf("=========================================\n");
+			
                 break;
             case OPCAO5:
                 Beep(1000,500);

@@ -134,7 +134,6 @@ void imprime_quarto(Quarto*q){
 	printf("%d \n",q->duracao);
 }
 
-
 void ListarQuarto(Lista *lista){ // listar hospedes cadastrados
 	Lista * aux; // variavel auxiliar para percorrer a lista
     for(aux=lista; aux!=NULL; aux=aux->prox) {
@@ -149,15 +148,17 @@ int vazia(Lista *lista){ // verificando se a lista esta vazia
 
 */
 
-
 Lista * BuscaHospede(Lista*lista, char * nomedohospede){ // buscar hospede
 	  Lista * p;
 	  for(p=lista;p!=NULL;p=p->prox){ // percorrendo a lista
-		if(strcmp(p->info->hospede, nomedohospede)== 0) // verificando se o elemento e igual a v
+		if(strcmp(p->info->hospede, nomedohospede)== 0) // verificando se o elemento e igual a novohospede
 		printf("hospede encontrado \n");
 		return p; // retorna no da lista
 	  }
-	  printf("Hospede encontrado");
+	  printf("Hospede não encontrado \n");
 	  return NULL; // nao achou o hospede
 }
+
+
+
 
