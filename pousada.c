@@ -112,19 +112,18 @@ Quarto * PreencheQuarto(void){
 	}
 
 
-/*
-Lista * RemoverHospede(Lista*lista, int v){ //remover hospede
+Lista * RemoverHospede(Lista*lista, char* nomedohospede){ //remover hospede
       Lista * ant = NULL; 
 	  Lista * p = lista;
-	  while(p->info!= v)
+	  while(p->info->hospede!= nomedohospede)
 	  if (p==NULL)
 	  return lista;
 	  ant = p;
-	  p = p-> prox;
+	  	  p = p-> prox;
 
  }
 
-*/
+
 
 void imprime_quarto(Quarto*q){
 	printf("%s \n", q->hospede);
@@ -139,23 +138,22 @@ void ListarQuarto(Lista *lista){ // listar hospedes cadastrados
     for(aux=lista; aux!=NULL; aux=aux->prox) {
 	imprime_quarto (aux->info);
 	}
+    if(lista==NULL){ // se nenhum hospede tiver sido cadastrado // verificando se a lista esta vazia
+		printf("Nenhum hospede cadastrado");
+	}
 }
 
-/*
-int vazia(Lista *lista){ // verificando se a lista esta vazia
-	return(lista==NULL);
-}
 
-*/
+
 
 Lista * BuscaHospede(Lista*lista, char * nomedohospede){ // buscar hospede
-	  Lista * p;
+	  Lista * p; 
 	  for(p=lista;p!=NULL;p=p->prox){ // percorrendo a lista
-		if(strcmp(p->info->hospede, nomedohospede)== 0) // verificando se o elemento e igual a novohospede
-		printf("hospede encontrado \n");
-		return p; // retorna no da lista
+		if(strcmp(p->info->hospede, nomedohospede)== 0) // verificando se o elemento e igual a nomehospede
+		printf("Hospede encontado");
+		return p; // retorna no da lista e o hospede e encontrado
 	  }
-	  printf("Hospede não encontrado \n");
+	  printf("Hospede nao encontrado");
 	  return NULL; // nao achou o hospede
 }
 
