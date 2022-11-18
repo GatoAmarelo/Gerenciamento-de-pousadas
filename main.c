@@ -87,7 +87,10 @@ int main(void) {
     unsigned char op; // opcao que o usuario digita
     unsigned int saida = 0; // variável aux para sair do programa
     Lista * listadequarto = cria();
-   Lista * HospedeBusca;
+    Lista * aux=NULL; // auxiliar usado para a lista nao ser anulada quando um hospede nao for encontrado
+    char nomedohospede[60];
+
+   
     do { // repetir menu 
         ApresentaMenu(N_OPCOES, OPCAO1,
                       TITULO_OPCAO1, TITULO_OPCAO2,
@@ -96,53 +99,56 @@ int main(void) {
         op = LeOpcao(OPCAO1, OPCAO1 + N_OPCOES - 1); 
         
         switch(op) {
-            case OPCAO1:
-                
+            case OPCAO1:             
                 Beep(1000,500); /* Emite um beep */
                  // chamada da funcao que adiciona hospede
-              
                Quarto * novoquarto = PreencheQuarto();
                listadequarto = InsereQuarto(listadequarto, novoquarto);
                break;
                
-            case OPCAO2:
-                Beep(1000,500);
-                // chamada da funcao que remove hospede
-               // Lista * a; // chama a lista para depois poder acessar o nome do hospede (atraves de info)
-                
-                
-             //   Lista * RemoverHospede(lista,nomedohospede );
-                  //   Lista * nomedohospede = p->info->hospede; 
-               // Quarto * nomedohospede = BuscaHospede();
-              //  listadequarto = RemoverHospede(listadequarto, nomedohospede);
-  
+            case OPCAO2: // Remove Hospede
+
+               Beep(1000,500); // Beep faz o barulho 
+               printf("Digite o nome do hospede que deseja remover : \n");
+               scanf(" %[^\n]", nomedohospede);
+               printf("Removendo...");
+               aux = RemoverHospede(listadequarto, nomedohospede);
+               if(aux!=NULL){
+                listadequarto = aux;
+               }
 
                 break;
  
             case OPCAO3:
                 Beep(1000,500);
-              ListarQuarto(listadequarto);
+                ListarQuarto(listadequarto); // chama a funcao de listar quarto
                 break;
-            case OPCAO4:
-                Beep(1000,500);
-        
-              // chama a lista para depois poder acessar o nome do hospede (atraves de info)
-              // printf("Digite o nome do hospede que deseja buscar : \n"); 
-              // scanf("%[^\n]",p->info->hospede); // lendo o nome do hospede que devera ser encontrado
-              // Quarto * nomedohospede = p->info->hospede; 
-               
-              // listadequarto = BuscaHospede(listadequarto,nomedohospede); // chamado a funcao busca hospede
-             Lista *p;
-             printf("Digite o nome do hospede que deseja buscar : \n");
-             scanf(" %[^\n]", p->info->hospede);
 
-            HospedeBusca = BuscaHospede(listadequarto, p->info->hospede);
-            
-            break;
-            case OPCAO5:
+
+            case OPCAO4: // Buscar Hospede
                 Beep(1000,500);
             
                 
+             
+               printf("Digite o nome do hospede que deseja buscar : \n");
+               scanf(" %[^\n]", nomedohospede); // lendo o nome do hospede que devera ser encontrado
+              
+               aux = BuscaHospede(listadequarto, nomedohospede ); // chamado a funcao busca hospede
+                 if(aux!=NULL){ // 
+                listadequarto = aux;
+               }
+    
+            break;
+            case OPCAO5: //Editar hospede
+
+
+                Beep(1000,500);
+               
+                // editar cadastro do hospede
+                   printf("Digite o nome do hospede que deseja editar o cadastro : \n");
+                   scanf(" %[^\n]", nomedohospede);
+                   MudarCadastro(listadequarto);
+               
                 break;
             case OPCAO6:
                 Beep(1000,500);
