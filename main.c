@@ -86,6 +86,9 @@ void ApresentaMenu(int nItens, int menorOpcao, ...) { // funcao responsavel por 
 int main(void) { 
     unsigned char op; // opcao que o usuario digita
     unsigned int saida = 0; // variável aux para sair do programa
+
+
+  
     Lista * listadequarto = cria();
     Lista * aux=NULL; // auxiliar usado para a lista nao ser anulada quando um hospede nao for encontrado
     char nomedohospede[60];
@@ -111,11 +114,15 @@ int main(void) {
                Beep(1000,500); // Beep faz o barulho 
                printf("Digite o nome do hospede que deseja remover : \n");
                scanf(" %[^\n]", nomedohospede);
-               printf("Removendo...");
-               aux = RemoverHospede(listadequarto, nomedohospede);
-               if(aux!=NULL){
-                listadequarto = aux;
-               }
+               printf("\n === Removendo... === \n");
+               listadequarto = RemoverHospede(listadequarto, nomedohospede);
+              
+              
+              // certo por enquanto
+              
+              // if(aux!=NULL){
+               //listadequarto = aux;
+               //} loop infinito
 
                 break;
  
@@ -123,33 +130,31 @@ int main(void) {
                 Beep(1000,500);
                 ListarQuarto(listadequarto); // chama a funcao de listar quarto
                 break;
+                // certo
 
-
-            case OPCAO4: // Buscar Hospede
-                Beep(1000,500);
-            
-                
+            case OPCAO4: // Buscar Hospede // erro nessa//
+                 Beep(1000,500);
+                 printf("Digite o nome do hospede que deseja buscar : \n");
+                 scanf(" %[^\n]", nomedohospede); // lendo o nome do hospede que devera ser encontrado
+                 
+                 aux = BuscaHospede(listadequarto, nomedohospede ); // chamado a funcao busca hospede
              
-               printf("Digite o nome do hospede que deseja buscar : \n");
-               scanf(" %[^\n]", nomedohospede); // lendo o nome do hospede que devera ser encontrado
-              
-               aux = BuscaHospede(listadequarto, nomedohospede ); // chamado a funcao busca hospede
-                 if(aux!=NULL){ // 
-                listadequarto = aux;
+                 
+                 if(aux!=NULL){ 
+                 listadequarto = aux;
+               
                }
+
+               
     
             break;
-            case OPCAO5: //Editar hospede
-
+            case OPCAO5: //Editar hospede // ok
 
                 Beep(1000,500);
-               
-                // editar cadastro do hospede
-                   printf("Digite o nome do hospede que deseja editar o cadastro : \n");
-                   scanf(" %[^\n]", nomedohospede);
                    MudarCadastro(listadequarto);
                
                 break;
+
             case OPCAO6:
                 Beep(1000,500);
                
