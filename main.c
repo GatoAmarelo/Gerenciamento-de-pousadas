@@ -22,6 +22,7 @@
 #define OPCAO7 '7'
 #define OPCAO8 '8'
 
+
 /****
 * Função: LimpaBuffer()
 * Descrição: Lê e descarta caracteres encontrados na entrada
@@ -87,7 +88,10 @@ int main(void) {
     unsigned char op; // opcao que o usuario digita
     unsigned int saida = 0; // variável aux para sair do programa
 
-
+    printf(" ==========================================================\n");
+	printf("Quartos disponiveis : %d\nQuartos ocupados : %d\nQuartos em manutencao : %d \n", disp, inds, manu);
+    printf(" ==========================================================\n");
+	
   
     Lista * listadequarto = cria();
     Lista * aux=NULL; // auxiliar usado para a lista nao ser anulada quando um hospede nao for encontrado
@@ -156,13 +160,21 @@ int main(void) {
                 break;
 
             case OPCAO6:
+            
                 Beep(1000,500);
-               
-                
+
+                printf(" ==========================================================\n");
+	            printf("Quartos disponiveis : %d\nQuartos ocupados : %d\nQuartos em manutencao : %d \n", disp, inds, manu);
+                printf(" ==========================================================\n");
+	  
                 break;
             case OPCAO7:
                 Beep(1000,500);
-               
+              
+                printf(" ==========================================================\n");
+	            printf("Quartos Pequenos : %d\nQuartos Medios : %d\nQuartos em Grandes : %d \n", pequeno, medio, grande);
+                printf(" ==========================================================\n");
+
                 break;
 
             case OPCAO8:

@@ -8,7 +8,7 @@ struct quarto{
 	    char hospede[60];
 	    float preco;
 	    int numero;
-	    char tipo[60];
+	    int tipo;
 	    int duracao;
 	    char status[60];
 	    
@@ -29,7 +29,12 @@ struct pousadap{
 };   
 
 
-
+    int disp = 15;
+	int inds = 0;
+	int manu = 5;
+	int pequeno = 0, grande = 0, medio = 0;
+	int otimo =0, bom =0, ruim =0, media=0;
+    
 
 
 
@@ -41,11 +46,12 @@ Quarto * PreencheQuarto(void){
          exit(1); 
 		 }
     
-         
+
+
 	Quarto * novoQuarto = (Quarto*) malloc(sizeof(Quarto)); // alocando um quarto
 
 
-  //  Pousadap avalia;
+    
 
     printf("Digite o nome do hospede: \n");
     scanf(" %[^\n]", novoQuarto->hospede); // q-> pois foi usado um ponteiro para Pousadap: typedef struct pousadap *Pousadap;
@@ -54,53 +60,65 @@ Quarto * PreencheQuarto(void){
     printf("Digite o numero do quarto : \n");
     scanf("%d", &novoQuarto->numero);
     printf("Qual tipo de quarto deseja ? \n");
-    scanf(" %[^\n]", novoQuarto->tipo);
-    printf("Quantos dias deseja ficar ? \n");
+	printf("A Pequeno \n B Medio  \n C Grande \n");
+    scanf("%d", &novoQuarto->tipo);
+	
+   
+    if (novoQuarto->tipo == 1){
+		
+		inds ++;
+        disp --;
+		pequeno++;
+
+	} else if (novoQuarto->tipo == 2){
+		
+		inds ++;
+        disp --;
+		medio++;
+
+	} else if (novoQuarto->tipo ==  3){
+		
+		inds ++;
+		disp --;
+        grande++;
+
+	} else {
+		printf("Erro ao escolher quarto\n");
+		printf("Quarto sendo escolhido pela pousada\n");
+		novoQuarto->tipo = 2;
+		medio++;
+	}
+
+	printf("Quantos dias deseja ficar ? \n");
     scanf("%d", &novoQuarto->duracao);
 
-	
+    
     printf("=== Cadastro do quarto realizado com sucesso ! ===\n");
- /** printf("Avalie a pousada \n");
-	printf("1 Otimo;\n2 Bom;\n3 medio;\n4 ruim; \n");
     
-    scanf("%d", &avaliacao);
-
-
-
-
-    
-   int otimo = 0, bom = 0, ruim =0, medio=0;
+	
    
-	   switch (avalia.avaliacao){ // avaliando a pousada
-		case 1 :
-			otimo++; // caso o usuario escolha a primeira opcao (Otimo) recebe + 1
-			break;
-		    
-		case 2 :
-			bom++ ;
-			break;
-		
-		case 3 :
-		    medio ++;
-		    break;
-		case 4 :
-			ruim++;
-			break;
-		
-		default :
-			printf("Opcao invalida !\n");
-			
-		  }
-        
-		
-      
- 
-*/
+    printf("Avalie a pousada \n");
+	printf("1 Otimo;\n2 Bom;\n3 medio;\n4 ruim; \n");
+    Pousadap * avalia = (Pousadap*) malloc(sizeof(Pousadap)); 
+    scanf("%d", &avalia->avaliacao);
 
-      fprintf(arquivor, "\nHospede : %s \t Preco : %.2f R$ \t Numero : %d \t Tipo : %s \t Duracao da estadia : %d dias \n", novoQuarto->hospede, novoQuarto->preco, novoQuarto->numero, novoQuarto->tipo, novoQuarto->duracao);
-  //    fprintf(arquivor, "Avaliacao do cliente :  Otimo %d Bom %d Medio %d Ruim %d",otimo, bom, medio, ruim);
-          
-     // fprintf(arquivor,"avaliacao %d", avalia.avaliacao);
+	
+	if(avalia->avaliacao = 1){
+		otimo++;
+	} else if(avalia->avaliacao = 2){
+		bom++;
+	}else if(avalia->avaliacao = 3){
+		media++;
+	}else if(avalia->avaliacao = 4){
+		ruim++;
+	} else{
+		printf("Erro ao fazer avaliacao\n");
+	}
+
+      printf("Avaliacao do cliente :  Otimo %d Bom %d Medio %d Ruim %d \n",otimo, bom, media, ruim);
+      fprintf(arquivor, "\nHospede : %s \t Preco : %.2f R$ \t Numero : %d \t Tipo : %d \t Duracao da estadia : %d dias \n", novoQuarto->hospede, novoQuarto->preco, novoQuarto->numero, novoQuarto->tipo, novoQuarto->duracao);
+      fprintf(arquivor, "Avaliacao do cliente :  Otimo %d Bom %d Medio %d Ruim %d",otimo, bom, media, ruim);
+      
 
 	  
 	  
@@ -153,12 +171,14 @@ Lista* ant = NULL; /* ponteiro para elemento anterior */
 }
 
 void imprime_quarto(Quarto*q){
+	int otimo = 0, bom = 0, media = 0, ruim =0;
 	printf("============================== \n");
 	printf("=== Nome do Hospede : %s  \n", q->hospede);
 	printf("=== Preco : %.2f reais       \n", q->preco);
 	printf("=== Numero do Quarto : %d  \n", q->numero);
-	printf("=== Tipo de Quarto : %s     \n",q->tipo);
+	printf("=== Tipo de Quarto : %d    \n",q->tipo);
 	printf("==  Dias : %d        \n",q->duracao); // certo
+	printf("== Avaliacao do cliente :  Otimo %d Bom %d Medio %d Ruim %d \n", otimo, bom, media, ruim);
     printf("============================== \n");
 }
 
@@ -186,7 +206,7 @@ Lista * BuscaHospede(Lista*lista, char * nomedohospede){ // buscar hospede
         	printf("=== Nome do Hospede : %s  \n", no->info->hospede);
 	        printf("=== Preco : %.2f reais      \n", no->info->preco);
 	        printf("=== Numero do Quarto : %d  \n", no->info->numero);
-	        printf("=== Tipo de Quarto : %s     \n",no->info->tipo);
+	        printf("=== Tipo de Quarto : %d     \n",no->info->tipo);
 	        printf("==  Dias : %d        \n",no->info->duracao); 
             printf("============================== \n");
         
@@ -224,7 +244,8 @@ Lista * BuscaHospede(Lista*lista, char * nomedohospede){ // buscar hospede
         printf("Digite o numero do quarto : \n");
         scanf("%d", &edita->numero);
         printf("Qual tipo de quarto deseja ? \n");
-        scanf(" %[^\n]", edita->tipo);
+        printf("1 - Pequeno \n 2 - Medio  \n 3 - Grande \n");
+        scanf("%d", &edita->tipo);
         printf("Quantos dias deseja ficar ? \n");
         scanf("%d", &edita->duracao);
 
