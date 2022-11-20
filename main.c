@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "pousada.c"
 
+
 #define TITULO_OPCAO1 "Adicionar Hospede" // texto exibido no menu
 #define TITULO_OPCAO2 "Remover Hospede"
 #define TITULO_OPCAO3 "Listar Hospedes Cadastrados"
@@ -62,14 +63,7 @@ int LeOpcao(int menorValor, int maiorValor) {
     return op;
 }
 
-/****
-* Função: ApresentaMenu
-* Descrição: Apresenta menu com número indeterminado de opções
-* Parâmetros:
-*   nItens (entrada): número de itens no menu
-*   menorOpcao (entrada): caractere associado ao item I
-* Retorno: Nada
-****/
+
 void ApresentaMenu(int nItens, int menorOpcao, ...) { // funcao responsavel por imprimir o menu
     int i;
     va_list argumentos;
@@ -81,23 +75,27 @@ void ApresentaMenu(int nItens, int menorOpcao, ...) { // funcao responsavel por 
     for(i = 0; i < nItens; ++i) {
         printf("%c-%s\n", menorOpcao++, va_arg(argumentos, char *));
     }
-    va_end(argumentos);/* Encerra processamento de argumentos */
+    va_end(argumentos);
 }
 
 int main(void) { 
     unsigned char op; // opcao que o usuario digita
     unsigned int saida = 0; // variável aux para sair do programa
 
+   
+    
     printf(" ==========================================================\n");
-	printf("Quartos disponiveis : %d\nQuartos ocupados : %d\nQuartos em manutencao : %d \n", disp, inds, manu);
+    printf(" ========= Sistema de Gerenciamento de Pousadas ===========\n");
+    printf(" ==========================================================\n");
+	printf(" Quartos disponiveis : %d\n Quartos ocupados : %d\n Quartos em manutencao : %d \n", disp, inds, manu);
     printf(" ==========================================================\n");
 	
-  
+    Pousadap * pousada = PousadaPreenche();
     Lista * listadequarto = cria();
     Lista * aux=NULL; // auxiliar usado para a lista nao ser anulada quando um hospede nao for encontrado
     char nomedohospede[60];
+    
 
-   
     do { // repetir menu 
         ApresentaMenu(N_OPCOES, OPCAO1,
                       TITULO_OPCAO1, TITULO_OPCAO2,
@@ -109,6 +107,7 @@ int main(void) {
             case OPCAO1:             
                 Beep(1000,500); /* Emite um beep */
                  // chamada da funcao que adiciona hospede
+               
                Quarto * novoquarto = PreencheQuarto();
                listadequarto = InsereQuarto(listadequarto, novoquarto);
                break;
@@ -116,12 +115,12 @@ int main(void) {
             case OPCAO2: // Remove Hospede
 
                Beep(1000,500); // Beep faz o barulho 
+               
                printf("Digite o nome do hospede que deseja remover : \n");
                scanf(" %[^\n]", nomedohospede);
                printf("\n === Removendo... === \n");
                listadequarto = RemoverHospede(listadequarto, nomedohospede);
-              
-              
+               
               // certo por enquanto
               
               // if(aux!=NULL){
@@ -133,6 +132,7 @@ int main(void) {
             case OPCAO3:
                 Beep(1000,500);
                 ListarQuarto(listadequarto); // chama a funcao de listar quarto
+                printf("== Avaliacao dos clientes : Otimo %d Bom %d Medio %d Ruim %d == \n", otimo, bom, media, ruim);
                 break;
                 // certo
 
@@ -147,11 +147,9 @@ int main(void) {
                  if(aux!=NULL){ 
                  listadequarto = aux;
                
-               }
-
-               
+               }       
     
-            break;
+                break;
             case OPCAO5: //Editar hospede // ok
 
                 Beep(1000,500);
@@ -170,11 +168,11 @@ int main(void) {
                 break;
             case OPCAO7:
                 Beep(1000,500);
-              
+            	
                 printf(" ==========================================================\n");
 	            printf("Quartos Pequenos : %d\nQuartos Medios : %d\nQuartos em Grandes : %d \n", pequeno, medio, grande);
                 printf(" ==========================================================\n");
-
+                
                 break;
 
             case OPCAO8:

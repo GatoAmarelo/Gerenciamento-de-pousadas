@@ -22,7 +22,7 @@ struct li{
 
 struct pousadap{
 	   char nome[50];
-	   char localizacao;
+	   char localizacao[50];
 	   int avaliacao;
 	   Lista * quartos;
 
@@ -32,27 +32,45 @@ struct pousadap{
     int disp = 15;
 	int inds = 0;
 	int manu = 5;
-	int pequeno = 0, grande = 0, medio = 0;
+	int pequeno = 0;
+	int grande = 0, medio = 0;
 	int otimo =0, bom =0, ruim =0, media=0;
     
 
-
-
-Quarto * PreencheQuarto(void){
     
-    FILE *arquivor = fopen("pousadax.txt", "r");
+Pousadap * PousadaPreenche(void){
+	    FILE *arquivor = fopen("pousadax.txt", "a");
          if(arquivor == NULL){
          printf("Erro ao abrir o arquivo");
          exit(1); 
 		 }
-    
 
+	      Pousadap * l = (Pousadap*) malloc(sizeof(Pousadap));
+          printf("Digite o nome da pousada : \n"); 
+          scanf(" %[^\n]", l->nome);
+          printf("Digite a localizacao da pousada : \n");
+          scanf(" %[^\n]", l->localizacao);
+		  fprintf(arquivor,"Nome da Pousada %s : Localizacao : %s", l->nome,l->localizacao);
+          return l;
+
+		  fclose(arquivor); 
+}
+
+Pousadap * Quantitativo(void){
+
+}
+
+Quarto * PreencheQuarto(void){
+    
+    FILE *arquivor = fopen("pousadax.txt", "a");
+         if(arquivor == NULL){
+         printf("Erro ao abrir o arquivo");
+         exit(1); 
+		 }
 
 	Quarto * novoQuarto = (Quarto*) malloc(sizeof(Quarto)); // alocando um quarto
-
-
     
-
+    
     printf("Digite o nome do hospede: \n");
     scanf(" %[^\n]", novoQuarto->hospede); // q-> pois foi usado um ponteiro para Pousadap: typedef struct pousadap *Pousadap;
     printf("Digite o preco : ");
@@ -60,15 +78,16 @@ Quarto * PreencheQuarto(void){
     printf("Digite o numero do quarto : \n");
     scanf("%d", &novoQuarto->numero);
     printf("Qual tipo de quarto deseja ? \n");
-	printf("A Pequeno \n B Medio  \n C Grande \n");
+	printf("1 Pequeno \n2 Medio  \n3 Grande \n");
     scanf("%d", &novoQuarto->tipo);
 	
    
     if (novoQuarto->tipo == 1){
+
 		
 		inds ++;
         disp --;
-		pequeno++;
+		pequeno++; 	
 
 	} else if (novoQuarto->tipo == 2){
 		
@@ -89,6 +108,7 @@ Quarto * PreencheQuarto(void){
 		medio++;
 	}
 
+
 	printf("Quantos dias deseja ficar ? \n");
     scanf("%d", &novoQuarto->duracao);
 
@@ -97,36 +117,30 @@ Quarto * PreencheQuarto(void){
     
 	
    
-    printf("Avalie a pousada \n");
+    printf("=== Avalie a pousada ===\n");
 	printf("1 Otimo;\n2 Bom;\n3 medio;\n4 ruim; \n");
-    Pousadap * avalia = (Pousadap*) malloc(sizeof(Pousadap)); 
-    scanf("%d", &avalia->avaliacao);
+    Pousadap avalia;
+    scanf("%d", &avalia.avaliacao);
 
 	
-	if(avalia->avaliacao = 1){
+	if(avalia.avaliacao == 1){
 		otimo++;
-	} else if(avalia->avaliacao = 2){
+	} else if(avalia.avaliacao == 2){
 		bom++;
-	}else if(avalia->avaliacao = 3){
+	}else if(avalia.avaliacao == 3){
 		media++;
-	}else if(avalia->avaliacao = 4){
+	}else if(avalia.avaliacao == 4){
 		ruim++;
 	} else{
 		printf("Erro ao fazer avaliacao\n");
 	}
 
-      printf("Avaliacao do cliente :  Otimo %d Bom %d Medio %d Ruim %d \n",otimo, bom, media, ruim);
+     
       fprintf(arquivor, "\nHospede : %s \t Preco : %.2f R$ \t Numero : %d \t Tipo : %d \t Duracao da estadia : %d dias \n", novoQuarto->hospede, novoQuarto->preco, novoQuarto->numero, novoQuarto->tipo, novoQuarto->duracao);
-      fprintf(arquivor, "Avaliacao do cliente :  Otimo %d Bom %d Medio %d Ruim %d",otimo, bom, media, ruim);
+      fprintf(arquivor, "Avaliacao dos clientes :  Otimo %d Bom %d Medio %d Ruim %d",otimo, bom, media, ruim);
       
-
-	  
-	  
+  
 		 return novoQuarto;
-
-
-      
-	
 
 	 fclose(arquivor); 
 	}
@@ -166,19 +180,21 @@ Lista* ant = NULL; /* ponteiro para elemento anterior */
     else
     /* retira elemento do meio da lista */
         ant->prox = ponteiro->prox;
-    free(ponteiro);
+        free(ponteiro);
+
+		inds --;
+        disp ++;		
+
     return lista;
 }
 
 void imprime_quarto(Quarto*q){
-	int otimo = 0, bom = 0, media = 0, ruim =0;
 	printf("============================== \n");
 	printf("=== Nome do Hospede : %s  \n", q->hospede);
 	printf("=== Preco : %.2f reais       \n", q->preco);
 	printf("=== Numero do Quarto : %d  \n", q->numero);
 	printf("=== Tipo de Quarto : %d    \n",q->tipo);
-	printf("==  Dias : %d        \n",q->duracao); // certo
-	printf("== Avaliacao do cliente :  Otimo %d Bom %d Medio %d Ruim %d \n", otimo, bom, media, ruim);
+	printf("==  Dias : %d        \n",q->duracao); 
     printf("============================== \n");
 }
 
@@ -244,7 +260,7 @@ Lista * BuscaHospede(Lista*lista, char * nomedohospede){ // buscar hospede
         printf("Digite o numero do quarto : \n");
         scanf("%d", &edita->numero);
         printf("Qual tipo de quarto deseja ? \n");
-        printf("1 - Pequeno \n 2 - Medio  \n 3 - Grande \n");
+        printf("1 - Pequeno \n2 - Medio  \n3 - Grande \n");
         scanf("%d", &edita->tipo);
         printf("Quantos dias deseja ficar ? \n");
         scanf("%d", &edita->duracao);
