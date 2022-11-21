@@ -11,7 +11,7 @@ struct quarto{
 	    int tipo;
 	    int duracao;
 	    char status[60];
-	    
+		struct li *a;
 };
 
 struct li{
@@ -21,28 +21,25 @@ struct li{
 };
 
 struct pousadap{
-	   char nome[50];
-	   char localizacao[50];
+	   char nome[60];
+	   char localizacao[60];
 	   int avaliacao;
 	   Lista * quartos;
-
+       struct quarto * l;
 };   
-
 
     int disp = 15;
 	int inds = 0;
 	int manu = 5;
 	int pequeno = 0;
-	int grande = 0, medio = 0;
+    int grande = 0, medio = 0;
 	int otimo =0, bom =0, ruim =0, media=0;
     
-
-    
 Pousadap * PousadaPreenche(void){
-	    FILE *arquivor = fopen("pousadax.txt", "a");
-         if(arquivor == NULL){
-         printf("Erro ao abrir o arquivo");
-         exit(1); 
+	       FILE *arquivo = fopen("pousadx.txt", "a");
+           if(arquivo == NULL){
+           printf("Erro ao abrir o arquivo");
+           exit(1); 
 		 }
 
 	      Pousadap * l = (Pousadap*) malloc(sizeof(Pousadap));
@@ -50,19 +47,16 @@ Pousadap * PousadaPreenche(void){
           scanf(" %[^\n]", l->nome);
           printf("Digite a localizacao da pousada : \n");
           scanf(" %[^\n]", l->localizacao);
-		  fprintf(arquivor,"Nome da Pousada %s : Localizacao : %s", l->nome,l->localizacao);
+		  
+		  fprintf(arquivo,"\nNome da Pousada : %s : Localizacao : %s\n",l->nome,l->localizacao);
           return l;
 
-		  fclose(arquivor); 
+		 fclose(arquivo);
 }
-
-Pousadap * Quantitativo(void){
-
-}
-
+ 
 Quarto * PreencheQuarto(void){
     
-    FILE *arquivor = fopen("pousadax.txt", "a");
+    FILE *arquivor = fopen("pousadx.txt", "a");
          if(arquivor == NULL){
          printf("Erro ao abrir o arquivo");
          exit(1); 
@@ -80,33 +74,32 @@ Quarto * PreencheQuarto(void){
     printf("Qual tipo de quarto deseja ? \n");
 	printf("1 Pequeno \n2 Medio  \n3 Grande \n");
     scanf("%d", &novoQuarto->tipo);
-	
-   
-    if (novoQuarto->tipo == 1){
-
-		
-		inds ++;
-        disp --;
-		pequeno++; 	
-
-	} else if (novoQuarto->tipo == 2){
-		
-		inds ++;
-        disp --;
-		medio++;
-
-	} else if (novoQuarto->tipo ==  3){
-		
+	 
+     switch (novoQuarto->tipo){
+		case 1 :
 		inds ++;
 		disp --;
-        grande++;
-
-	} else {
+		pequeno ++; 
+        break;
+		case 2 :
+		inds ++;
+		disp --;
+		medio++;
+		break;
+		case 3 :
+		inds ++;
+		disp --;
+		grande++;
+		break;
+		default :
 		printf("Erro ao escolher quarto\n");
 		printf("Quarto sendo escolhido pela pousada\n");
 		novoQuarto->tipo = 2;
 		medio++;
-	}
+		break;
+
+	 }
+
 
 
 	printf("Quantos dias deseja ficar ? \n");
@@ -120,6 +113,7 @@ Quarto * PreencheQuarto(void){
     printf("=== Avalie a pousada ===\n");
 	printf("1 Otimo;\n2 Bom;\n3 medio;\n4 ruim; \n");
     Pousadap avalia;
+	
     scanf("%d", &avalia.avaliacao);
 
 	
@@ -134,18 +128,18 @@ Quarto * PreencheQuarto(void){
 	} else{
 		printf("Erro ao fazer avaliacao\n");
 	}
-
      
-      fprintf(arquivor, "\nHospede : %s \t Preco : %.2f R$ \t Numero : %d \t Tipo : %d \t Duracao da estadia : %d dias \n", novoQuarto->hospede, novoQuarto->preco, novoQuarto->numero, novoQuarto->tipo, novoQuarto->duracao);
-      fprintf(arquivor, "Avaliacao dos clientes :  Otimo %d Bom %d Medio %d Ruim %d",otimo, bom, media, ruim);
-      
+     fprintf(arquivor, "\nHospede : %s  Preco : %.2f R$  Numero : %d  Tipo : %d  Duracao da estadia : %d dias\n", novoQuarto->hospede, novoQuarto->preco, novoQuarto->numero, novoQuarto->tipo, novoQuarto->duracao);
+    
+	 fprintf(arquivor, "\nAvaliacao dos clientes :  Otimo %d Bom %d Medio %d Ruim %d\n",otimo, bom, media, ruim);
+    
   
 		 return novoQuarto;
 
 	 fclose(arquivor); 
 	}
 	
- 	
+    	
  Lista * cria (void){ // criando uma lista
      return NULL;
 	  } // certo
@@ -183,7 +177,8 @@ Lista* ant = NULL; /* ponteiro para elemento anterior */
         free(ponteiro);
 
 		inds --;
-        disp ++;		
+        disp ++;
+		
 
     return lista;
 }
@@ -236,8 +231,7 @@ Lista * BuscaHospede(Lista*lista, char * nomedohospede){ // buscar hospede
 }
 
 
-
- void MudarCadastro(Lista * lista){
+void MudarCadastro(Lista * lista){
 	    
 		
 

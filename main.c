@@ -90,11 +90,11 @@ int main(void) {
 	printf(" Quartos disponiveis : %d\n Quartos ocupados : %d\n Quartos em manutencao : %d \n", disp, inds, manu);
     printf(" ==========================================================\n");
 	
-    Pousadap * pousada = PousadaPreenche();
+    PousadaPreenche();
     Lista * listadequarto = cria();
     Lista * aux=NULL; // auxiliar usado para a lista nao ser anulada quando um hospede nao for encontrado
     char nomedohospede[60];
-    
+   // PousadaPreenche();
 
     do { // repetir menu 
         ApresentaMenu(N_OPCOES, OPCAO1,
@@ -119,13 +119,11 @@ int main(void) {
                printf("Digite o nome do hospede que deseja remover : \n");
                scanf(" %[^\n]", nomedohospede);
                printf("\n === Removendo... === \n");
-               listadequarto = RemoverHospede(listadequarto, nomedohospede);
-               
-              // certo por enquanto
+               aux= RemoverHospede(listadequarto, nomedohospede);
               
-              // if(aux!=NULL){
-               //listadequarto = aux;
-               //} loop infinito
+              if(aux!=NULL){
+               listadequarto = aux;
+               } 
 
                 break;
  
@@ -147,7 +145,7 @@ int main(void) {
                  if(aux!=NULL){ 
                  listadequarto = aux;
                
-               }       
+               }      
     
                 break;
             case OPCAO5: //Editar hospede // ok
@@ -160,19 +158,20 @@ int main(void) {
             case OPCAO6:
             
                 Beep(1000,500);
-
+               
                 printf(" ==========================================================\n");
-	            printf("Quartos disponiveis : %d\nQuartos ocupados : %d\nQuartos em manutencao : %d \n", disp, inds, manu);
+	            printf("Quartos Pequenos : %d\nQuartos Medios : %d\nQuartos em Grandes : %d \n", pequeno, medio, grande);
                 printf(" ==========================================================\n");
+                
 	  
                 break;
             case OPCAO7:
                 Beep(1000,500);
             	
                 printf(" ==========================================================\n");
-	            printf("Quartos Pequenos : %d\nQuartos Medios : %d\nQuartos em Grandes : %d \n", pequeno, medio, grande);
+	            printf("Quartos disponiveis : %d\nQuartos ocupados : %d\nQuartos em manutencao : %d \n", disp, inds, manu);
                 printf(" ==========================================================\n");
-                
+
                 break;
 
             case OPCAO8:
