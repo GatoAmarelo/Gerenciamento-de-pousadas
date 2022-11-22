@@ -121,9 +121,8 @@ int main(void) {
                
                printf("Digite o nome do hospede que deseja remover : \n");
                scanf(" %[^\n]", nomedohospede);
-               printf("\n === Removendo... === \n");
                listadequarto = RemoverHospede(listadequarto, nomedohospede);
-              
+               printf("\n === Removendo... === \n");
              // if(aux!=NULL){
                //listadequarto = aux;
               // } 

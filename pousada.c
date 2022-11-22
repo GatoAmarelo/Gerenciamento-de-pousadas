@@ -28,7 +28,6 @@ struct pousadap{
        struct quarto * l;
 };   
     
-    
 	int disp = 0;
 	int inds = 0;
 	int manu = 0;
@@ -48,9 +47,7 @@ Pousadap * PousadaPreenche(void){
           scanf(" %[^\n]", l->nome);
           printf("Digite a localizacao da pousada : \n");
           scanf(" %[^\n]", l->localizacao);
-		 // printf("Digite a quantidade de quartos :");
-		 // scanf("%d", &l->quartos);
-		 // disp = l->quartos;
+
 		  printf("...\n");
 		  printf("Ha tres tipos de quartos na pousada : \nPequeno, medio e grande\n");
 		  printf("Digite a disponibilidade em cada uma das tres categorias\n");
@@ -78,7 +75,7 @@ Quarto * PreencheQuarto(void){
          exit(1); 
 		 }
 
-	Quarto * novoQuarto = (Quarto*) malloc(sizeof(Quarto)); // alocando um quarto
+	Quarto * novoQuarto = (Quarto*) malloc(sizeof(Quarto)); 
     
 	 
 	if(disp == 0){
@@ -90,7 +87,7 @@ Quarto * PreencheQuarto(void){
     
     
     printf("Digite o nome do hospede: \n");
-    scanf(" %[^\n]", novoQuarto->hospede); // q-> pois foi usado um ponteiro para Pousadap: typedef struct pousadap *Pousadap;
+    scanf(" %[^\n]", novoQuarto->hospede); 
     printf("Digite o preco : ");
     scanf("%f", &novoQuarto->preco);
     printf("Digite o numero do quarto : \n");
@@ -212,7 +209,7 @@ Lista* ant = NULL; /* ponteiro para elemento anterior */
     Lista* ponteiro = lista; /* ponteiro para percorrer a lista*/
     /* procura elemento na lista, guardando anterior */
     while(strcmp(ponteiro->info->hospede,nomedohospede)!= 0){ // strcmp comparando os nomes
-    	if (ponteiro==NULL){
+    	if (ponteiro->info->hospede==NULL){
         	return lista; 
 			}
 			/* n?o achou: retorna lista original */
@@ -229,9 +226,8 @@ Lista* ant = NULL; /* ponteiro para elemento anterior */
     /* retira elemento do meio da lista */
         ant->prox = ponteiro->prox;
         free(ponteiro);
-		inds --;
-        disp ++;
 		manu++;
+		inds--;
 
     return lista;
 }
@@ -309,6 +305,45 @@ void MudarCadastro(Lista * lista){
         printf("Qual tipo de quarto deseja ? \n");
         printf("1 - Pequeno \n2 - Medio  \n3 - Grande \n");
         scanf("%d", &edita->tipo);
+		switch (edita->tipo){
+		case 1 :
+		pequeno --;
+		if(pequeno == -1){
+			printf("Os quartos pequenos acabaram, volte para fazer o cadastro \n");
+			pequeno ++;
+			return 1;
+			
+		}
+        break;
+		case 2 :
+		medio--;
+		if(medio == -1){
+			printf("Os quartos medios acabaram, volte para fazer o cadastro \n");
+			medio ++;
+			return 1;
+			
+		}
+
+		break;
+		case 3 :
+		grande--;
+
+		if(grande == -1){
+			printf("Os quartos grandes acabaram, volte para fazer o cadastro \n");
+			inds --;
+			return 1;
+			
+		}
+		break;
+		default :
+		printf("Erro ao escolher quarto\n");
+		printf("Quarto sendo escolhido pela pousada\n");
+		edita->tipo = 2;
+		medio--;
+		break;
+
+	 }
+		manu++;
         printf("Quantos dias deseja ficar ? \n");
         scanf("%d", &edita->duracao);
 
