@@ -98,24 +98,54 @@ Quarto * PreencheQuarto(void){
     printf("Qual tipo de quarto deseja ? \n");
 	printf("1 Pequeno \n2 Medio  \n3 Grande \n");
     scanf("%d", &novoQuarto->tipo);
-	 
-
      
      switch (novoQuarto->tipo){
 		case 1 :
 		inds ++;
 		disp --;
-		pequeno --; 
+		pequeno --;
+
+		if(pequeno == -1){
+			printf("Os quartos pequenos acabaram, volte para fazer o cadastro \n");
+			pequeno ++;
+			disp ++;
+			inds --;
+			return 1;
+			
+		}
+	
+
         break;
 		case 2 :
 		inds ++;
 		disp --;
 		medio--;
+
+		
+		if(medio == -1){
+			printf("Os quartos medios acabaram, volte para fazer o cadastro \n");
+			medio ++;
+			disp ++;
+			inds --;
+			return 1;
+			
+		}
+
 		break;
 		case 3 :
 		inds ++;
 		disp --;
 		grande--;
+
+		
+		if(grande == -1){
+			printf("Os quartos grandes acabaram, volte para fazer o cadastro \n");
+			grande ++;
+			disp ++;
+			inds --;
+			return 1;
+			
+		}
 		break;
 		default :
 		printf("Erro ao escolher quarto\n");
