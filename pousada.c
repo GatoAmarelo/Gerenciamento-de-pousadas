@@ -11,7 +11,7 @@ struct quarto{
 	    int tipo;
 	    int duracao;
 	    char status[60];
-		struct li *a;
+		
 };
 
 struct li{
@@ -24,13 +24,14 @@ struct pousadap{
 	   char nome[60];
 	   char localizacao[60];
 	   int avaliacao;
-	   Lista * quartos;
+	   int quartos;
        struct quarto * l;
 };   
-
-    int disp = 15;
+    
+    
+	int disp = 0;
 	int inds = 0;
-	int manu = 5;
+	int manu = 0;
 	int pequeno = 0;
     int grande = 0, medio = 0;
 	int otimo =0, bom =0, ruim =0, media=0;
@@ -47,7 +48,22 @@ Pousadap * PousadaPreenche(void){
           scanf(" %[^\n]", l->nome);
           printf("Digite a localizacao da pousada : \n");
           scanf(" %[^\n]", l->localizacao);
-		  
+		 // printf("Digite a quantidade de quartos :");
+		 // scanf("%d", &l->quartos);
+		 // disp = l->quartos;
+		  printf("...\n");
+		  printf("Ha tres tipos de quartos na pousada : \nPequeno, medio e grande\n");
+		  printf("Digite a disponibilidade em cada uma das tres categorias\n");
+		  printf("Quantos quartos pequenos tem disponiveis na pousada ? \n");
+		  scanf("%d", &pequeno);
+		  printf("Quantos quartos medios tem disponiveis na pousada ? \n");
+		  scanf("%d", &medio);
+		  printf("Quantos quartos grandes tem disponiveis na pousada ? \n");
+		  scanf("%d", &grande);
+		  disp = (pequeno+grande+medio);
+		  printf("Existe algum quarto em manutencao ? se sim, digite a quantidade \n");
+		  scanf("%d", &manu);
+
 		  fprintf(arquivo,"\nNome da Pousada : %s : Localizacao : %s\n",l->nome,l->localizacao);
           return l;
 
@@ -64,6 +80,14 @@ Quarto * PreencheQuarto(void){
 
 	Quarto * novoQuarto = (Quarto*) malloc(sizeof(Quarto)); // alocando um quarto
     
+	 
+	if(disp == 0){
+		printf("Nao ha mais quartos disponiveis no momento e os outros se encontram em manutencao");
+		printf("Por favor, volte mais tarde");
+		return 0;
+	}
+
+    
     
     printf("Digite o nome do hospede: \n");
     scanf(" %[^\n]", novoQuarto->hospede); // q-> pois foi usado um ponteiro para Pousadap: typedef struct pousadap *Pousadap;
@@ -75,33 +99,33 @@ Quarto * PreencheQuarto(void){
 	printf("1 Pequeno \n2 Medio  \n3 Grande \n");
     scanf("%d", &novoQuarto->tipo);
 	 
+
+     
      switch (novoQuarto->tipo){
 		case 1 :
 		inds ++;
 		disp --;
-		pequeno ++; 
+		pequeno --; 
         break;
 		case 2 :
 		inds ++;
 		disp --;
-		medio++;
+		medio--;
 		break;
 		case 3 :
 		inds ++;
 		disp --;
-		grande++;
+		grande--;
 		break;
 		default :
 		printf("Erro ao escolher quarto\n");
 		printf("Quarto sendo escolhido pela pousada\n");
 		novoQuarto->tipo = 2;
-		medio++;
+		medio--;
 		break;
 
 	 }
-
-
-
+      
 	printf("Quantos dias deseja ficar ? \n");
     scanf("%d", &novoQuarto->duracao);
 
@@ -175,10 +199,9 @@ Lista* ant = NULL; /* ponteiro para elemento anterior */
     /* retira elemento do meio da lista */
         ant->prox = ponteiro->prox;
         free(ponteiro);
-
 		inds --;
         disp ++;
-		
+		manu++;
 
     return lista;
 }

@@ -87,10 +87,13 @@ int main(void) {
     printf(" ==========================================================\n");
     printf(" ========= Sistema de Gerenciamento de Pousadas ===========\n");
     printf(" ==========================================================\n");
-	printf(" Quartos disponiveis : %d\n Quartos ocupados : %d\n Quartos em manutencao : %d \n", disp, inds, manu);
+	printf(" Quartos ocupados : %d\n Quartos em manutencao : %d \n",inds, manu);
     printf(" ==========================================================\n");
 	
     PousadaPreenche();
+    printf("=========================\n");
+    printf("==== Menu da Pousada ====\n");
+    printf("=========================\n");
     Lista * listadequarto = cria();
     Lista * aux=NULL; // auxiliar usado para a lista nao ser anulada quando um hospede nao for encontrado
     char nomedohospede[60];
@@ -119,11 +122,11 @@ int main(void) {
                printf("Digite o nome do hospede que deseja remover : \n");
                scanf(" %[^\n]", nomedohospede);
                printf("\n === Removendo... === \n");
-               aux= RemoverHospede(listadequarto, nomedohospede);
+               listadequarto = RemoverHospede(listadequarto, nomedohospede);
               
-              if(aux!=NULL){
-               listadequarto = aux;
-               } 
+             // if(aux!=NULL){
+               //listadequarto = aux;
+              // } 
 
                 break;
  
@@ -163,7 +166,7 @@ int main(void) {
 	            printf("Quartos Pequenos : %d\nQuartos Medios : %d\nQuartos em Grandes : %d \n", pequeno, medio, grande);
                 printf(" ==========================================================\n");
                 
-	  
+	            
                 break;
             case OPCAO7:
                 Beep(1000,500);
