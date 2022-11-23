@@ -4,7 +4,7 @@
 #include "pousada.c"
 
 
-#define TITULO_OPCAO1 "Adicionar Hospede" // texto exibido no menu
+#define TITULO_OPCAO1 "Adicionar Hospede" 
 #define TITULO_OPCAO2 "Remover Hospede"
 #define TITULO_OPCAO3 "Listar Hospedes Cadastrados"
 #define TITULO_OPCAO4 "Buscar Hospede"
@@ -13,7 +13,7 @@
 #define TITULO_OPCAO7 "Consultar Quantitativo De Quartos Por Status"
 #define TITULO_OPCAO8 "Sair"
 
-#define N_OPCOES 8 // quantidade de opções do menu
+#define N_OPCOES 8 
 #define OPCAO1 '1'
 #define OPCAO2 '2'
 #define OPCAO3 '3'
@@ -24,26 +24,14 @@
 #define OPCAO8 '8'
 
 
-/****
-* Função: LimpaBuffer()
-* Descrição: Lê e descarta caracteres encontrados na entrada
-* Parâmetros: Nenhum
-* Retorno: Nada
-****/
+
 void LimpaBuffer(void) {  
-    int valorLido; /* valorLido deve ser int! */
+    int valorLido;
     do {
         valorLido = getchar();
     } while ((valorLido != '\n') && (valorLido != EOF));
 }
-/****
-* Função: LeOpcao()
-* Descrição: Lê e valida a opção digitada pelo usuário
-* Parâmetros:
-*   menorValor (entrada): o menor valor válido
-*   maiorValor (entrada): o maior valor válido
-* Retorno: A opção lida é validada
-****/
+
 int LeOpcao(int menorValor, int maiorValor) {
     int op;
     while (1) {
@@ -64,14 +52,11 @@ int LeOpcao(int menorValor, int maiorValor) {
 }
 
 
-void ApresentaMenu(int nItens, int menorOpcao, ...) { // funcao responsavel por imprimir o menu
+void ApresentaMenu(int nItens, int menorOpcao, ...) { 
     int i;
     va_list argumentos;
-    /* Inicia lista de argumentos variáveis */
     va_start(argumentos, menorOpcao);
-    /* Lê cada argumento e imprime na tela. Note que o */
-    /* tipo de cada argumento é char *, que é o tipo que */
-    /* representa strings em C */
+   
     for(i = 0; i < nItens; ++i) {
         printf("%c-%s\n", menorOpcao++, va_arg(argumentos, char *));
     }
@@ -79,9 +64,8 @@ void ApresentaMenu(int nItens, int menorOpcao, ...) { // funcao responsavel por 
 }
 
 int main(void) { 
-    unsigned char op; // opcao que o usuario digita
-    unsigned int saida = 0; // variável aux para sair do programa
-
+    unsigned char op; 
+    unsigned int saida = 0; 
    
     
     printf(" ==========================================================\n");
@@ -95,11 +79,10 @@ int main(void) {
     printf("==== Menu da Pousada ====\n");
     printf("=========================\n");
     Lista * listadequarto = cria();
-    Lista * aux=NULL; // auxiliar usado para a lista nao ser anulada quando um hospede nao for encontrado
+    Lista * aux=NULL; 
     char nomedohospede[60];
-   // PousadaPreenche();
-
-    do { // repetir menu 
+   
+    do { 
         ApresentaMenu(N_OPCOES, OPCAO1,
                       TITULO_OPCAO1, TITULO_OPCAO2,
                       TITULO_OPCAO3, TITULO_OPCAO4, TITULO_OPCAO5, 
@@ -108,49 +91,44 @@ int main(void) {
         
         switch(op) {
             case OPCAO1:             
-                Beep(1000,500); /* Emite um beep */
-                 // chamada da funcao que adiciona hospede
-               
+                Beep(1000,500);
+
                Quarto * novoquarto = PreencheQuarto();
                listadequarto = InsereQuarto(listadequarto, novoquarto);
+              
                break;
                
-            case OPCAO2: // Remove Hospede
+            case OPCAO2: 
 
-               Beep(1000,500); // Beep faz o barulho 
+               Beep(1000,500); 
                
                printf("Digite o nome do hospede que deseja remover : \n");
                scanf(" %[^\n]", nomedohospede);
                listadequarto = RemoverHospede(listadequarto, nomedohospede);
                printf("\n === Removendo... === \n");
-             // if(aux!=NULL){
-               //listadequarto = aux;
-              // } 
-
+        
                 break;
  
             case OPCAO3:
                 Beep(1000,500);
-                ListarQuarto(listadequarto); // chama a funcao de listar quarto
+                ListarQuarto(listadequarto); 
                 printf("== Avaliacao dos clientes : Otimo %d Bom %d Medio %d Ruim %d == \n", otimo, bom, media, ruim);
                 break;
-                // certo
+               
 
-            case OPCAO4: // Buscar Hospede // erro nessa//
+            case OPCAO4: 
                  Beep(1000,500);
                  printf("Digite o nome do hospede que deseja buscar : \n");
-                 scanf(" %[^\n]", nomedohospede); // lendo o nome do hospede que devera ser encontrado
+                 scanf(" %[^\n]", nomedohospede);
                  
-                 aux = BuscaHospede(listadequarto, nomedohospede ); // chamado a funcao busca hospede
-             
-                 
+                 aux = BuscaHospede(listadequarto, nomedohospede );
                  if(aux!=NULL){ 
                  listadequarto = aux;
                
                }      
     
                 break;
-            case OPCAO5: //Editar hospede // ok
+            case OPCAO5: 
 
                 Beep(1000,500);
                    MudarCadastro(listadequarto);
@@ -169,7 +147,7 @@ int main(void) {
                 break;
             case OPCAO7:
                 Beep(1000,500);
-            	
+    
                 printf(" ==========================================================\n");
 	            printf("Quartos disponiveis : %d\nQuartos ocupados : %d\nQuartos em manutencao : %d \n", disp, inds, manu);
                 printf(" ==========================================================\n");

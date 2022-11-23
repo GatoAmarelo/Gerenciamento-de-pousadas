@@ -1,14 +1,18 @@
 
-Nome da Pousada : ana : Localizacao : tttt
+Nome da Pousada : anabel : Localizacao : jesus
 
-Nome da Pousada : anabela : Localizacao : boa
+Hospede : leila  Preco : 55.00 R$  Numero : 33  Tipo : 3  Duracao da estadia : 222 dias
 
-Hospede : ana  Preco : 67.00 R$  Numero : 33  Tipo : 1  Duracao da estadia : 2 dias
+Avaliacao dos clientes :  Otimo 0 Bom 0 Medio 0 Ruim 1
 
-Avaliacao dos clientes :  Otimo 0 Bom 1 Medio 0 Ruim 0
+Nome da Pousada : ultimo  : Localizacao : teste
 
-Nome da Pousada : anabel : Localizacao : arabia
+Hospede : anabel  Preco : 78.00 R$  Numero : 56  Tipo : 3  Duracao da estadia : 3 dias
 
-Hospede : anba  Preco : 22.00 R$  Numero : 1  Tipo : 1  Duracao da estadia : 1 dias
+Avaliacao dos clientes :  Otimo 0 Bom 0 Medio 0 Ruim 1
 
-Avaliacao dos clientes :  Otimo 1 Bom 0 Medio 0 Ruim 0
+Nome da Pousada : anabela : Localizacao : bella
+
+Hospede : deiddididid  Preco : 888888896.00 R$  Numero : 777777  Tipo : 3  Duracao da estadia : 333 dias
+
+Avaliacao dos clientes :  Otimo 0 Bom 0 Medio 0 Ruim 1

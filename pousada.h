@@ -10,3 +10,4 @@ void ListarQuarto(Lista *lista);
 Lista * BuscaHospede(Lista*lista, char * nomedohospede);
 void MudarCadastro(Lista*lista);
 Pousadap * PousadaPreenche(void);
+
